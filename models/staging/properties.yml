@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: clean_eu
+    description: The deduped entity tables.
+    tables:
+      - name: live_full_order_dedup
+        description: Deduped orders.
+      - name: live_full_item_dedup
+        description: Deduped items.
+
+models:
+  - name: stg_orders
+    description: Deduped orders for the given client in the given period. The unnest means that only orders with supplier history are included. Therefore there is a 1-1 mapping between each order and the latest supplier who handled the order.
+    columns:
+      - name: orderid
+        description: The primary key
+        tests:
+          - unique
+          - not_null
+      - name: supplierid
+        tests:
+          - not_null
+          - latest_supplier
+  - name: stg_items
+    description: Deduped items for the given client in the partitioned period.
+    columns:
+      - name: itemset
+        description: The primary key
+        tests:
+          - unique
+          - not_null
+      - name: orderid

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: repeat_customer
+    description: Calculates features that describe how much a supplier re-delivers to the same customers.
+    columns:
+      - name: supplierid
+        description: The primary key
+        tests:
+          - unique
+          - not_null
+  - name: repeat_item
+    description: Calculates features that describe how much a supplier re-delivers the same item.
+    columns:
+      - name: supplierid
+        description: The primary key
+        tests:
+          - unique
+          - not_null
+  - name: features
+    description: The combined features for each supplier.
