@@ -1,12 +1,12 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: "ravelintest"
+name: "dbt_milly_project"
 version: "1.0.0"
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: "ravelintest"
+profile: "dbt_milly_project"
 
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
@@ -26,11 +26,17 @@ clean-targets: # directories to be removed by `dbt clean`
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
-# In this example config, we tell dbt to build all models in the example/ directory
-# as tables. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
 models:
-    ravelintest:
-        # Applies to all files under models/example/
-        example:
+    dbt_milly_project:
+        staging:
             materialized: view
+        marts:
+            intermediate:
+                materialized: view
+            materialized: table
+
+vars:
+    client: "ravelintest"
+    partition: "2020-01-01"
+    period: 5
+    limit: 5
