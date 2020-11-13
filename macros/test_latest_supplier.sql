@@ -11,7 +11,7 @@ earlier_suppliers as (
       time,
       ROW_NUMBER() over (partition by orderid order by time desc) as rn
       FROM
-        {{ ref("live_full_order_dedup") }}, UNNEST(supplierhistory)
+        {{ source("clean_eu", "live_full_order_dedup") }}, UNNEST(supplierhistory)
   )
   where rn > 1
 ),
