@@ -29,7 +29,7 @@ Here I have shown the queries & structure we require to a) clean the order + ite
 3. In `models/staging/schema.yml` we define the source tables (containing mock data) that exist in the project. We also define some tests for the two staging tables; that the primary key of `stg_orders` and `stg_items` is unique and non-null. I've included an example of a custom test called `latest_supplier` built for `stg_orders`, which can be found in `macros/test_latest_supplier.sql`; it will return the number of rows that fail the test, so a result of 0 means the test passes.
 4. The `description` fields in all the schema yamls means that when we generate documentation each model / column can include a human readable string to explain it. See figure 2 and 3.
 
-![bq structure](/images/bq_structure.png =50x)
+![bq structure](/images/bq_structure.png)
 
 **Figure 1:** In the bq project, data was uploaded into the `clean_eu` dataset and models are materialised into the `dbt_milly` dataset.
 
@@ -50,7 +50,7 @@ This repo cannot be ran locally without the necessary dbt user credentials on di
 ![dbt run](/images/dbt_run.png)
 **Figure 4:** Output of `dbt run`.
 
-![dbt test](/images/dbt_test.png =75x)
+![dbt test](/images/dbt_test.png)
 **Figure 5:** Output of `dbt test`.
 
 In a real life scenario, these two jobs can be scheduled via dbt cloud, which connects to bigquery and the dbt repository, so updated code and data will be used every time a `run` or `test` job is due to take place. However for feature generation, we might not require scheduled jobs and just use dbt to build our feature queries offline whenever we run a pipeline.
