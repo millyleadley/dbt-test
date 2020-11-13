@@ -1,5 +1,3 @@
-{{ config(materialized='table', sort='supplierid') }}
-
 WITH
 
 repeat_customer as (
